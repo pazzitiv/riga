@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CommandsController;
+use App\Http\Controllers\GridController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('api')
+    ->prefix('/commands')
+    ->group(function () {
+        Route::get('/', [
+            CommandsController::class,
+            'list'
+        ]);
+        Route::get('/generate', [
+            CommandsController::class,
+            'generate'
+        ]);
+    });
+
+Route::middleware('api')
+    ->prefix('/grid')
+    ->group(function () {
+        Route::get('/', [
+            GridController::class,
+            'list'
+        ]);
+
+        Route::get('/generate', [
+            GridController::class,
+            'generate'
+        ]);
+    });
