@@ -28,6 +28,10 @@ Route::middleware('api')
             CommandsController::class,
             'list'
         ]);
+        Route::post('/', [
+            CommandsController::class,
+            'store'
+        ]);
         Route::get('/generate', [
             CommandsController::class,
             'generate'

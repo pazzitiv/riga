@@ -5025,7 +5025,19 @@ var Api = /*#__PURE__*/function () {
         },
         referrerPolicy: 'no-referrer',
         body: JSON.stringify(data)
+      }).then(function (response) {
+        return response.json();
       });
+    }
+  }, {
+    key: "serializeObject",
+    value: function serializeObject(el) {
+      var obj = {};
+      var arr = el.serializeArray();
+      arr.forEach(function (item) {
+        obj[item.name] = item.value;
+      });
+      return obj;
     }
   }]);
 

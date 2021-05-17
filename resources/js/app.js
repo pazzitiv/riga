@@ -50,7 +50,16 @@ class Api {
             },
             referrerPolicy: 'no-referrer',
             body: JSON.stringify(data)
-        })
+        }).then(response => response.json())
+    }
+
+    serializeObject(el) {
+        let obj = {};
+        const arr = el.serializeArray();
+
+        arr.forEach((item) => {obj[item.name] = item.value})
+
+        return obj
     }
 }
 
